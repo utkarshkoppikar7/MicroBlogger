@@ -1,8 +1,9 @@
+var local = "http://localhost:5000/"
 function log(){
     var user = document.getElementById("username").value;
     var pass = document.getElementById("password").value;
 
-    axios.post('https://tranquil-taiga-26020.herokuapp.com/users',  
+    axios.post('http://localhost:5000/users',  
     JSON.stringify({
        "username" : user,
        "password" : pass
@@ -32,7 +33,7 @@ function sign(){
         alert("Both passwords must be same!");
     }
     else{
-    axios.post('https://tranquil-taiga-26020.herokuapp.com/addUser',  
+    axios.post('http://localhost:5000/addUser',  
     JSON.stringify({
        "username" : user,
        "password" : pass
