@@ -61,7 +61,7 @@ function createTweet(username,content)
 
 async function storeTweet(username,content)
 {
-    await axios.post('https://tranquil-taiga-26020.herokuapp.com/addPost',  
+    await axios.post('http://localhost:5000/addPost',  
          JSON.stringify({
             "username" : username,
             "content" : content
@@ -77,7 +77,7 @@ async function storeTweet(username,content)
 async function loadFeed()
 {
     var body = document.getElementById("block");
-    await axios.get('https://tranquil-taiga-26020.herokuapp.com/getPosts')
+    await axios.get('http://localhost:5000/getPosts')
           .then(function (response) {
             var data = response.data;
             for(let i=data.length-1;i>=0;i--)
