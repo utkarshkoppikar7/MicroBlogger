@@ -41,12 +41,23 @@
     <textarea id="tweetCnt" cols="90" rows="5"></textarea>
   </span>
   <span>
+    
+    <input type="file" id="img" name="img" accept="image/*" onchange="imageUploaded()">
+  </span>
+  <span>
     <button id="tAdd">Tweet</button>
   </span>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br>
+  
   </div>
 </footer>
 
 <br><br><br><br><br> <br>
+
+<div id="toggle">
+  <a id="mypost" onclick="mine()">View my Tweets</a>
+  <a id="mypost" onclick="loadFeed()">View all Tweets</a>
+</div>
 
 <div id="block">
     
