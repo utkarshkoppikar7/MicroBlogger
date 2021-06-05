@@ -1,3 +1,7 @@
+var local = "http://localhost:5000/"
+var global ="https://tranquil-taiga-26020.herokuapp.com/"
+home = global;
+
 function reload(){
   location.reload();
 }
@@ -23,7 +27,7 @@ btn.addEventListener("click",(event)=>{
         
         tweet = createTweet(user,text);
         body.appendChild(tweet);
-        reload();
+        loadFeed();
         storeTweet(user,text);
          
     }
@@ -61,29 +65,53 @@ function createTweet(username,content)
 
 async function storeTweet(username,content)
 {
-    await axios.post('https://tranquil-taiga-26020.herokuapp.com/addPost',  
-         JSON.stringify({
-            "username" : username,
-            "content" : content
-        }))
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(err => {
-            console.error(err);
-          });
+  await axios.post(home+'addPost',  
+  JSON.stringify({
+     "username" : username,
+     "content" : content
+ }))
+   .then(function (response) {
+     console.log(response);
+   })
+   .catch(err => {
+     console.error(err);
+   });
 }
 
 async function loadFeed()
 {
+  var body = document.getElementById("block");
+  body.innerHTML ="";
+  await axios.get(home+'getPosts')
+        .then(function (response) {
+          var data = response.data;
+          for(let i=data.length-1;i>=0;i--)
+          {
+              tweet = createTweet(data[i].username,data[i].content);
+              body.appendChild(tweet);
+          }
+        })
+        .catch(err => {
+          console.error(err);
+        });
+}
+
+async function mine()
+{
     var body = document.getElementById("block");
-    await axios.get('https://tranquil-taiga-26020.herokuapp.com/getPosts')
+    body.innerHTML ="";
+    let params = new URLSearchParams(location.search);
+    var username = params.get('name');
+    await axios.get(home+'getPosts')
           .then(function (response) {
             var data = response.data;
             for(let i=data.length-1;i>=0;i--)
             {
-                tweet = createTweet(data[i].username,data[i].content);
+              if(data[i].username == username){
+                  tweet = createTweet(data[i].username,data[i].content);
+                }
                 body.appendChild(tweet);
+              
             }
           })
           .catch(err => {

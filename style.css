@@ -87,6 +87,32 @@ h2 {
   line-height: 50px;
   text-transform: uppercase;
 }
+
+#tAdd > img {
+  position: relative;
+  text-align: center;
+  left: 100px;
+  height: 100px;
+  width: auto;
+}
+
+#toggle {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+
+#toggle > a {
+  position: relative;
+  left: 450px;
+  color: lightskyblue;
+  text-decoration: underline;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 100px;
+}
+
 .small-top-space {
   margin-top: 20px;
 }
@@ -226,6 +252,12 @@ header {
   border: 2px solid lightskyblue;
   padding: 10px;
   margin: 20px;
+}
+
+#tweetCnt {
+  padding-top: 10px;
+  padding-left: 5px;
+  resize: none;
 }
 
 #tAdd {
