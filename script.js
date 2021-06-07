@@ -1,6 +1,6 @@
-var local = "http://localhost:5000/"
-var global ="https://tranquil-taiga-26020.herokuapp.com/"
-home = global;
+const local = "http://localhost:5000/"
+const global ="https://tranquil-taiga-26020.herokuapp.com/"
+let home = global;
 
 function reload(){
   location.reload();
@@ -21,23 +21,21 @@ btn.addEventListener("click",(event)=>{
     let user = username;
     event.preventDefault();
     text = document.getElementById("tweetCnt").value;
-    if(text == ""){
-    }
-    else{
-        
-        tweet = createTweet(user,text);
+    img = document.getElementById("imgUrl").value;
+   
+       console.log(img);
+        tweet = createTweet(user,text,img);
         body.appendChild(tweet);
         loadFeed();
-        storeTweet(user,text);
-         
-    }
+        storeTweet(user,text,img);
     document.getElementById("tweetCnt").value = "";
+    document.getElementById("imgUrl").value = "";
 })
 
 
 };
 
-function createTweet(username,content)
+function createTweet(username,content,img)
 {
     tweet = document.createElement('div');
     tweet.setAttribute("class","tweet");
@@ -59,16 +57,24 @@ function createTweet(username,content)
     tweet.appendChild(hr);
     tweet.appendChild(br);
     tweet.appendChild(p);
-
+    
+    if(img!=="")
+    {
+      image  = document.createElement("img");
+      image.src = img;
+      tweet.appendChild(image);
+    }
+    
     return tweet;
 }
 
-async function storeTweet(username,content)
+async function storeTweet(username,content,img)
 {
   await axios.post(home+'addPost',  
   JSON.stringify({
      "username" : username,
-     "content" : content
+     "content" : content,
+     "image" : img
  }))
    .then(function (response) {
      console.log(response);
@@ -87,7 +93,7 @@ async function loadFeed()
           var data = response.data;
           for(let i=data.length-1;i>=0;i--)
           {
-              tweet = createTweet(data[i].username,data[i].content);
+              tweet = createTweet(data[i].username,data[i].content,data[i].image);
               body.appendChild(tweet);
           }
         })
@@ -108,7 +114,7 @@ async function mine()
             for(let i=data.length-1;i>=0;i--)
             {
               if(data[i].username == username){
-                  tweet = createTweet(data[i].username,data[i].content);
+                  tweet = createTweet(data[i].username,data[i].content,data[i].image);
                 }
                 body.appendChild(tweet);
               

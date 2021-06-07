@@ -1,6 +1,7 @@
-var local = "http://localhost:5000/"
-var global ="https://tranquil-taiga-26020.herokuapp.com/"
-home = global;
+const local = "http://localhost:5000/"
+const global ="https://tranquil-taiga-26020.herokuapp.com/"
+let home = global;
+
 function log(){
     var user = document.getElementById("username").value;
     var pass = document.getElementById("password").value;
